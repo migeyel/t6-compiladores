@@ -1,0 +1,9 @@
+WHITESPACE = _{ " " | "\n" | "\t" | "\r" }
+COMMENT = _{ "#" ~ (!"\n" ~ ANY)* ~ "\n" }
+natural = @{ ASCII_NONZERO_DIGIT ~ ASCII_DIGIT* | "0" }
+ident = @{ ('A'..'Z' | 'a'..'z') ~ ('A'..'Z' | 'a'..'z' | '0'..'9' | "_")* }
+item = { natural ~ ident }
+request = { "out" ~ item }
+item_set = { item ~ ("+" ~ item)* }
+recipe = { ident ~ ":" ~ item_set ~ "->" ~ item_set }
+set = { SOI ~ (item | recipe | request)* ~ EOI }

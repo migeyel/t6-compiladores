@@ -1,0 +1,11 @@
+[package]
+name = "t6"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.64"
+clap = { version = "3.2.20", features = ["derive"] }
+pest = "2.3.0"
+pest_derive = "2.3.0"
+z3 = "0.11.2"
