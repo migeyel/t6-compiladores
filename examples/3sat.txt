@@ -1,0 +1,42 @@
+# Exemplo de como resolver uma instância de 3-SAT com o programa.
+# Usamos a instância de exemplo (a ∨ ¬b ∨ ¬d) ∧ (¬a ∨ b ∨ ¬c) ∧ (b ∨ ¬c ∨ d).
+
+# Inventário
+1 a
+1 b
+1 c
+1 d
+
+# Atribuição de verdade
+a_is_true: 1 a -> 9 at
+b_is_true: 1 b -> 9 bt
+c_is_true: 1 c -> 9 ct
+d_is_true: 1 d -> 9 dt
+
+# Atribuição de falsidade
+a_is_false: 1 a -> 9 af
+b_is_false: 1 b -> 9 bf
+c_is_false: 1 c -> 9 cf
+d_is_false: 1 d -> 9 df
+
+# Cláusulas
+
+# a ∨ ¬b ∨ ¬d
+c1a: 1 at -> 1 c1
+c1b: 1 bf -> 1 c1
+c1c: 1 df -> 1 c1
+
+# ¬a ∨ b ∨ ¬c
+c2a: 1 af -> 1 c2
+c2b: 1 bt -> 1 c2
+c2c: 1 cf -> 1 c2
+
+# b ∨ ¬c ∨ d
+c3a: 1 bt -> 1 c3
+c3b: 1 cf -> 1 c3
+c3c: 1 dt -> 1 c3
+
+# Conjunção
+mksat: 1 c1 + 1 c2 + 1 c3 -> 1 sat
+
+out 1 sat

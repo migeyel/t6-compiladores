@@ -1,0 +1,14 @@
+# Uma quantidade inicial no inventário, representada por um número e um nome.
+2 log
+3 cobblestone
+
+# Uma receita, representada por uma equação de transição.
+# - Duas receitas não podem ter o mesmo nome.
+# - O mesmo item não pode aparecer duas vezes no mesmo lado da receita.
+# - Receitas não podem formar ciclos (ver acima).
+craft_planks: 1 log -> 4 plank
+craft_sticks: 2 plank -> 4 stick
+craft_stone_pickaxe: 3 cobblestone + 2 stick -> 1 stone_pickaxe
+
+# Uma saída desejada.
+out 1 stone_pickaxe
