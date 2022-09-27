@@ -1,9 +1,26 @@
+// Espaços em branco a serem ignorados
 WHITESPACE = _{ " " | "\n" | "\t" | "\r" }
+
+// Comentários no estilo semelhante a Python
 COMMENT = _{ "#" ~ (!"\n" ~ ANY)* ~ "\n" }
+
+// Definição de um número natural
 natural = @{ ASCII_NONZERO_DIGIT ~ ASCII_DIGIT* | "0" }
+
+// Identificador, deve iniciar por letra e pode ser seguido por letras ou números e _
 ident = @{ ('A'..'Z' | 'a'..'z') ~ ('A'..'Z' | 'a'..'z' | '0'..'9' | "_")* }
+
+// Um item é uma quantidade seguida de um identificador
 item = { natural ~ ident }
+
+// Uma request é uma requisição de saida, indicando o item final a ser craftado
 request = { "out" ~ item }
+
+// Um item_set é o somatório de um ou mais itens
 item_set = { item ~ ("+" ~ item)* }
+
+// A receita possui um nome, um item_set de entrada e um item_set de saida
 recipe = { ident ~ ":" ~ item_set ~ "->" ~ item_set }
+
+// O set é a definição do programa em si, possuindo os elementos acima.
 set = { SOI ~ (item | recipe | request)* ~ EOI }
